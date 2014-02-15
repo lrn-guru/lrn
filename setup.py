@@ -5,7 +5,7 @@ setup(
     version='0.0.1',
     author=['Razzi Abuissa','Alex Brashear'],
     author_email='alexjbrashear@gmail.com',
-    packages='lrn',
+    packages=['lrn'],
     scripts=['bin/stowe-towels.py','bin/wash-towels.py'],
     url='http://pypi.python.org/pypi/TowelStuff/',
     license='LICENSE.txt',
