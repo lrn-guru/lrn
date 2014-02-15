@@ -50,7 +50,7 @@ def get_task():
 
 	lrn_task = int(os.environ['LRN_TASK'])
 
-	return lesson['task'][lrn_task]
+	return lesson['tasks'][lrn_task]
 
 def get_branch():
 	#import ipdb; ipdb.set_trace()
