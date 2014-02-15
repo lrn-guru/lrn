@@ -58,8 +58,8 @@ def start(name):
 	url = 'https://github.com/lrn-guru/learn-{}.git'.format(name)
 	command = 'git clone {}'.format(url)
 	call(command.split())
-	command = "cd learn-{}".format(name)
-	call(command.split())
+	folder = "learn-{}".format(name)
+	os.chdir(folder)
 	os.environ['LRN_TASK'] = '0'
 	introduce()
 	task()
@@ -80,7 +80,7 @@ def hint():
 
 if args.command == 'list':
 	list_projects()
-elif args.command == 'start':	
+elif args.command == 'start':
 	if len(sys.argv) == 3:
 		start(sys.argv[-1])
 	else:
