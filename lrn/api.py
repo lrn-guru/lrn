@@ -32,7 +32,7 @@ def get_local_config():
 		path = '../'
 	else:
 		path = '../../'
-	with open('{}config.json'.format(path), 'r') as js:
+	with open('{}.config.json'.format(path), 'r') as js:
 		return loads(js.read())
 
 def get_config(name):
