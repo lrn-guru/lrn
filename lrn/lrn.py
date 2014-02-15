@@ -61,7 +61,7 @@ def start(name):
 	command = "cd learn-{}".format(name)
 	call(command.split())
 	os.environ['LRN_TASK'] = '0'
-	introduce(name)
+	introduce()
 	task()
 
 
