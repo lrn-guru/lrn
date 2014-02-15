@@ -2,7 +2,7 @@
 from __future__ import print_function
 
 import argparse
-import os
+import sys
 
 from termcolor import cprint
 
@@ -75,6 +75,6 @@ def run_tests():
 if args.command == 'list':
 	list_projects()
 elif args.command == 'start':
-	start('hi')
+	start(sys.argv[-1])
 else:
 	print('!')
