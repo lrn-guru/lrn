@@ -39,9 +39,9 @@ def get_config(name):
 	# try:
 	# 	get_local_config()
 	# except IOError:
-		url = 'https://raw.github.com/lrn-guru/learn-{}/master/.config.json'.format(name)
-		r = requests.get(url)
-		return r.json()
+	url = 'https://raw.github.com/lrn-guru/learn-{}/master/.config.json'.format(name)
+	r = requests.get(url)
+	return r.json()
 
 def get_task():
 	branch = get_branch()
