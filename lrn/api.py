@@ -55,4 +55,4 @@ def get_task():
 def get_branch():
 	#import ipdb; ipdb.set_trace()
 	status = check_output('git branch'.split())
-	return status[2:].strip("\n")
+	return status[2:status.find('\n')]
