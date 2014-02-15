@@ -2,9 +2,12 @@ import os
 from json import loads
 from subprocess import check_output
 
+from ipdb import set_trace
+
 import requests
 
 def get_repos():
+	set_trace()
 	r = requests.get('https://api.github.com/orgs/lrn-guru/repos')
 	repos = r.json()
 	repo_names = []
