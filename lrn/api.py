@@ -4,17 +4,6 @@ from subprocess import check_output
 
 import requests
 
-def get_current_repo():
-	if os.path.exists('.git'):
-	# 	return Repository('.')
-	# elif os.path.exists('../.git'):
-	# 	return Repository('..')
-	# elif os.path.exists('../../.git'):
-	# 	return Repository('../..')
-	# else:
-		print('No git repository found.')
-		exit(1)
-
 def get_repos():
 	r = requests.get('https://api.github.com/orgs/lrn-guru/repos')
 	repos = r.json()
@@ -32,17 +21,33 @@ def get_repos():
 
 def get_local_config():
 	if os.path.exists('.config.json'):
-		with open('.config.json', 'r') as j:
-			return loads(j.read())
+		path = '.'
+	elif os.path.exists('../.config.json'):
+		path = '../'
+	else:
+		path = '../../'
+	with open('{}config.json'.format(path), 'r') as j:
+		return loads(j.read())
 
 def get_config(name):
 	try:
-		get_local_config(name)
-	except Exception:
+		get_local_config()
+	except IOError:
 		url = 'https://raw.github.com/lrn-guru/learn-{}/master/.config.json'.format(name)
 		r = requests.get(url)
 		return r.json()
 
-def get_current_branch():
+def get_task():
+	branch = get_branch()
+	config = get_config()
+	for lesson in config['lessons']:
+		if lesson['branch'] == branch:
+			break # at the right lesson
+
+	lrn_task = os.environ['LRN_TASK']
+
+	return lesson[lrn_task]
+
+def get_branch():
 	status = check_output('git branch'.split())
 	return status.split()[2]
