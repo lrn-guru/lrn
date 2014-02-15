@@ -7,16 +7,18 @@ def get_repos():
 	repo_names = []
 	for repo in repos:
 		name = repo['full_name'].split('/')
-		j = get_config(name[1])
+		project_name = name[1].split('-')[1]
+		j = get_config(project_name)
 		description = j['short_description']
 		difficulty = j['difficulty']
-		repo_names.append(name[1], description, difficulty)
+		repo_names.append(project_name, description, difficulty)
 
 	return repo_names
 
 def get_config(name):
 
-	request = 'https://raw2.github.com/lrn-guru/' + name + '/master/.config.json'
+	request = 'https://raw2.github.com/lrn-guru/learn-django/master/.config.json'
+	#request = 'https://raw2.github.com/lrn-guru/learn-' + name + '/master/.config.json'
 	r = requests.get(request)
 	return r.json()
 
