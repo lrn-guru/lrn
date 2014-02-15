@@ -7,7 +7,7 @@ from ipdb import set_trace
 import requests
 
 def get_repos():
-	set_trace()
+	#set_trace()
 	r = requests.get('https://api.github.com/orgs/lrn-guru/repos')
 	repos = r.json()
 	# repos = loads(open('~/repos.json', 'r').read())
@@ -15,6 +15,8 @@ def get_repos():
 	for repo in repos:
 		name = repo['full_name'].split('/')
 		project_name = name[1]
+		if (project_name == 'lrn' or project_name == 'lrn-guru.github.io'):
+			continue
 		github_name = project_name[6:]
 		print(github_name)
 		j = get_config(github_name)
