@@ -2,10 +2,11 @@
 from __future__ import print_function
 
 from os import environ
-from subprocess import check_output
 import argparse
 
 from termcolor import cprint
+
+import api
 
 def l(s, color=None, newline=True):
 	''' Print a string with a color, no endline.'''
@@ -45,8 +46,7 @@ def list_projects():
 
 def run_tests():
 	# get the current branch
-	status = check_output('git branch'.split())
-	branch = status[2:status.find('\n')]
+	branch = api.get_current_branch()
 
 if args.command == 'list':
 	list_projects()
