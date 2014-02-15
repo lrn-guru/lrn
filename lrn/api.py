@@ -10,6 +10,7 @@ def get_repos():
 	set_trace()
 	r = requests.get('https://api.github.com/orgs/lrn-guru/repos')
 	repos = r.json()
+	# repos = loads(open('~/repos.json', 'r').read())
 	repo_names = []
 	for repo in repos:
 		name = repo['full_name'].split('/')
@@ -18,6 +19,7 @@ def get_repos():
 		j = get_config(github_name)
 		description = j['short_description']
 		difficulty = j['difficulty']
+		print(preject_name)
 		repo_names.append((github_name, description, difficulty))
 
 	return repo_names
