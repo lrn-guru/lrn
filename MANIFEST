@@ -2,6 +2,6 @@
 CHANGES.txt
 requirements.txt
 setup.py
-bin/stowe-towels.py
-bin/wash-towels.py
+bin/lrn
+bin/lrn.py
 lrn/lrn.py
