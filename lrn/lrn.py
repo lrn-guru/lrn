@@ -46,7 +46,7 @@ def list_projects():
 def run_tests():
 	# get the current branch
 	status = check_output('git branch'.split())
-	star = status.find('*')
+	branch = status[2:status.find('\n')]
 
 if args.command == 'list':
 	list_projects()
