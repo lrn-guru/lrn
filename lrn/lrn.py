@@ -73,15 +73,19 @@ def run_tests():
 	print(test)
 	# test_file =
 
+def hint():
+	task_json = api.get_task()
+	print(task_json['hint'])
+
 
 if args.command == 'list':
 	list_projects()
-elif args.command == 'start':
-	# hackish
+elif args.command == 'start':	
 	if len(sys.argv) == 3:
 		start(sys.argv[-1])
 	else:
 		l('Error: Specify a tutorial to start.', 'red')
-
+elif args.command == 'hint':
+	hint()
 else:
 	print('!')

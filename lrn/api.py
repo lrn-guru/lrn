@@ -27,7 +27,7 @@ def get_repos():
 
 def get_local_config():
 	if os.path.exists('.config.json'):
-		path = '.'
+		path = ''
 	elif os.path.exists('../.config.json'):
 		path = '../'
 	else:
@@ -41,8 +41,9 @@ def get_config(name):
 	return r.json()
 
 def get_task():
+
 	branch = get_branch()
-	config = get_config()
+	config = get_local_config()
 	for lesson in config['lessons']:
 		if lesson['branch'] == branch:
 			break # at the right lesson
@@ -52,5 +53,6 @@ def get_task():
 	return lesson['task'][lrn_task]
 
 def get_branch():
+	#import ipdb; ipdb.set_trace()
 	status = check_output('git branch'.split())
-	return status.split()[2]
+	return status[2:].strip("\n")
