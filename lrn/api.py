@@ -25,6 +25,13 @@ def get_repos():
 
 	return repo_names
 
+
+def get_config(name):
+	url = 'https://raw.github.com/lrn-guru/learn-{}/master/.config.json'.format(name)
+	r = requests.get(url)
+	return r.json()
+
+
 def get_local_config():
 	if os.path.exists('.config.json'):
 		path = ''
@@ -35,22 +42,15 @@ def get_local_config():
 	with open('{}.config.json'.format(path), 'r') as js:
 		return loads(js.read())
 
-def get_config(name):
-	url = 'https://raw.github.com/lrn-guru/learn-{}/master/.config.json'.format(name)
-	r = requests.get(url)
-	return r.json()
 
-def get_task(number=None):
+def get_task():
 	branch = get_branch()
 	config = get_local_config()
 	for lesson in config['lessons']:
 		if lesson['branch'] == branch:
 			break # at the right lesson
 
-	if number:
-		lrn_task = number
-	else:
-		lrn_task = int(os.environ['LRN_TASK'])
+	lrn_task = get_lrn_task()
 
 	return lesson['tasks'][lrn_task]
 
@@ -61,3 +61,20 @@ def get_branch():
 def get_starting_branch():
 	config = get_local_config()
 	return config['lessons'][0]['branch']
+
+def find_lrn_txt():
+	this_dir = '.lrn_task.txt'
+	for i in range(4):
+		path = '..' * i + this_dir
+		if os.path.exists(path):
+			return path
+
+def set_lrn_task(number):
+	lrn_json = find_lrn_txt()
+	with open(lrn_json, 'w') as f:
+		f.write(number)
+
+def get_lrn_task():
+	lrn_json = find_lrn_txt()
+	with open(lrn_json, 'r') as f:
+		return int(f.read())

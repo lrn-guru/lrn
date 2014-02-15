@@ -62,7 +62,8 @@ def start(name):
 	folder = 'learn-{}'.format(name)
 	os.system('cd {}'.format(folder))
 	os.chdir(folder)
-	os.system('export LRN_TASK=0')
+	api.set_lrn_task(0)
+
 	branch = api.get_starting_branch()
 	command = 'git checkout {}'.format(branch)
 	os.system(command)
