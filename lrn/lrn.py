@@ -1,6 +1,8 @@
 #!/usr/bin/env python
-
 from __future__ import print_function
+
+from os import environ
+from subprocess import check_output
 import argparse
 
 from termcolor import cprint
@@ -40,6 +42,11 @@ def list_projects():
 		l(proj[0].ljust(9), 'yellow', False)
 		l(proj[1].ljust(60), 'blue', False)
 		l('*' * proj[2], 'yellow')
+
+def run_tests():
+	# get the current branch
+	status = check_output('git branch'.split())
+	star = status.find('*')
 
 if args.command == 'list':
 	list_projects()
