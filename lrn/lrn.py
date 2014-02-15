@@ -2,7 +2,7 @@
 from __future__ import print_function
 
 import argparse
-import os
+import sys
 
 from termcolor import cprint
 
@@ -25,7 +25,7 @@ parser = argparse.ArgumentParser(description=description)
 parser.add_argument('command', help='The action to take (list, start, et cetera)')
 # parser.add_argument('-v', '--virtual', help='Whether or not to run lrn in a virtual machine')
 
-args = parser.parse_args()
+args, sub_args = parser.parse_known_args()
 
 projects = api.get_repos()
 
@@ -75,6 +75,6 @@ def run_tests():
 if args.command == 'list':
 	list_projects()
 elif args.command == 'start':
-	start('hi')
+	start(sys.argv[-1])
 else:
 	print('!')
