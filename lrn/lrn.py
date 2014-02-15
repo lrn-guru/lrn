@@ -53,13 +53,14 @@ def task():
 
 
 def start(name):
-	url = 'https://github.com/lrn-guru/learn-{}.git'.format(name)
-	command = 'git clone {}'.format(url)
-	call(command.split())
-	call('cd {}'.format(name).split())
-	os.environ['LRN_TASK'] = 1
-	introduce(name)
-	task()
+	print("At start with name {}".format(name))
+	# url = 'https://github.com/lrn-guru/learn-{}.git'.format(name)
+	# command = 'git clone {}'.format(url)
+	# call(command.split())
+	# call('cd {}'.format(name).split())
+	# os.environ['LRN_TASK'] = 1
+	# introduce(name)
+	# task()
 
 
 def run_tests():
@@ -73,5 +74,7 @@ def run_tests():
 
 if args.command == 'list':
 	list_projects()
+elif args.command == 'start':
+	start('hi')
 else:
 	print('!')

@@ -18,11 +18,9 @@ def get_repos():
 		if (project_name == 'lrn' or project_name == 'lrn-guru.github.io'):
 			continue
 		github_name = project_name[6:]
-		print(github_name)
 		j = get_config(github_name)
 		description = j['short_description']
 		difficulty = j['difficulty']
-		print(project_name)
 		repo_names.append((github_name, description, difficulty))
 
 	return repo_names
