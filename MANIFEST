@@ -2,6 +2,5 @@
 CHANGES.txt
 requirements.txt
 setup.py
-bin/lrn
 bin/lrn.py
 lrn/lrn.py
