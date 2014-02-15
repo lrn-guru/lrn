@@ -47,10 +47,11 @@ def introduce():
 	l(config['introduction'], 'green')
 
 
-def task():
+def task(number=None):
 	""" Informs the user of their current task."""
-	task = api.get_task()
-	l(task, 'blue')
+	# If the task number is not none, ask the api for that
+	task = api.get_task(number)
+	l(task['instruction'], 'cyan')
 
 
 
@@ -58,9 +59,13 @@ def start(name):
 	url = 'https://github.com/lrn-guru/learn-{}.git'.format(name)
 	command = 'git clone {}'.format(url)
 	call(command.split())
-	folder = "learn-{}".format(name)
+	folder = 'learn-{}'.format(name)
+	os.system('cd {}'.format(folder))
 	os.chdir(folder)
-	os.environ['LRN_TASK'] = '0'
+	os.system('export LRN_TASK=0')
+	branch = api.get_starting_branch()
+	command = 'git checkout {}'.format(branch)
+	os.system(command)
 	introduce()
 	task()
 

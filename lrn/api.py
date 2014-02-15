@@ -40,19 +40,24 @@ def get_config(name):
 	r = requests.get(url)
 	return r.json()
 
-def get_task():
-
+def get_task(number=None):
 	branch = get_branch()
 	config = get_local_config()
 	for lesson in config['lessons']:
 		if lesson['branch'] == branch:
 			break # at the right lesson
 
-	lrn_task = int(os.environ['LRN_TASK'])
+	if number:
+		lrn_task = number
+	else:
+		lrn_task = int(os.environ['LRN_TASK'])
 
 	return lesson['tasks'][lrn_task]
 
 def get_branch():
-	#import ipdb; ipdb.set_trace()
 	status = check_output('git branch'.split())
 	return status[2:status.find('\n')]
+
+def get_starting_branch():
+	config = get_local_config()
+	return config['lessons'][0]['branch']
