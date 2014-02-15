@@ -19,7 +19,6 @@ def get_repos():
 			continue
 		github_name = project_name[6:]
 		js = get_config(github_name)
-		__import__('ipdb').set_trace()
 		description = js['short_description']
 		difficulty = js['difficulty']
 		repo_names.append((github_name, description, difficulty))
@@ -37,9 +36,6 @@ def get_local_config():
 		return loads(js.read())
 
 def get_config(name):
-	# try:
-	# 	get_local_config()
-	# except IOError:
 	url = 'https://raw.github.com/lrn-guru/learn-{}/master/.config.json'.format(name)
 	r = requests.get(url)
 	return r.json()
@@ -51,9 +47,9 @@ def get_task():
 		if lesson['branch'] == branch:
 			break # at the right lesson
 
-	lrn_task = os.environ['LRN_TASK']
+	lrn_task = int(os.environ['LRN_TASK'])
 
-	return lesson[lrn_task]
+	return lesson['task'][lrn_task]
 
 def get_branch():
 	status = check_output('git branch'.split())

@@ -41,11 +41,10 @@ def list_projects():
 		l(proj[1].ljust(60), 'blue', False)
 		l('*' * proj[2], 'yellow')
 
-def introduce(name):
+def introduce():
 	""" Welcomes a new user to the {name} tutorial."""
-	config = api.get_config(name)
-	__import__('ipdb').set_trace()
-	l(config['intruduction'], 'green')
+	config = api.get_local_config()
+	l(config['introduction'], 'green')
 
 
 def task():
@@ -59,8 +58,9 @@ def start(name):
 	url = 'https://github.com/lrn-guru/learn-{}.git'.format(name)
 	command = 'git clone {}'.format(url)
 	call(command.split())
-	call('cd {}'.format(name).split())
-	os.environ['LRN_TASK'] = '1'
+	command = "cd learn-{}".format(name)
+	call(command.split())
+	os.environ['LRN_TASK'] = '0'
 	introduce(name)
 	task()
 
