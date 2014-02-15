@@ -13,10 +13,11 @@ def get_repos():
 		name = repo['full_name'].split('/')
 		project_name = name[1]
 		github_name = project_name[6:]
+		print(github_name)
 		j = get_config(github_name)
 		description = j['short_description']
 		difficulty = j['difficulty']
-		print(preject_name)
+		print(project_name)
 		repo_names.append((github_name, description, difficulty))
 
 	return repo_names
