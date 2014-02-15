@@ -1,17 +1,17 @@
 import os
+from json import loads
 from subprocess import check_output
 
 import requests
-from pygit2 import Repository
 
 def get_current_repo():
 	if os.path.exists('.git'):
-		return Repository('.')
-	elif os.path.exists('../.git'):
-		return Repository('..')
-	elif os.path.exists('../../.git'):
-		return Repository('../..')
-	else:
+	# 	return Repository('.')
+	# elif os.path.exists('../.git'):
+	# 	return Repository('..')
+	# elif os.path.exists('../../.git'):
+	# 	return Repository('../..')
+	# else:
 		print('No git repository found.')
 		exit(1)
 
@@ -30,16 +30,19 @@ def get_repos():
 
 	return repo_names
 
-def get_config(name):
-	url = 'https://raw.github.com/lrn-guru/learn-{}/master/.config.json'.format(name)
-	r = requests.get(url)
-	return r.json()
+def get_local_config():
+	if os.path.exists('.config.json'):
+		with open('.config.json', 'r') as j:
+			return loads(j.read())
 
-def get_current_branch(repo):
-	head = repo.listall_branches()[0]
-	if head.is_head():
-		return head
-	else:
-		print('locating current branch')
-		status = check_output('git branch'.split())
-		return repo.lookup_branch(status.split()[2])
+def get_config(name):
+	try:
+		get_local_config(name)
+	except Exception:
+		url = 'https://raw.github.com/lrn-guru/learn-{}/master/.config.json'.format(name)
+		r = requests.get(url)
+		return r.json()
+
+def get_current_branch():
+	status = check_output('git branch'.split())
+	return status.split()[2]

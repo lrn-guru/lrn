@@ -48,6 +48,7 @@ def run_tests():
 	# get the current branch
 	branch = api.get_current_branch()
 
+
 if args.command == 'list':
 	list_projects()
 else:
