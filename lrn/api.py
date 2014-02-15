@@ -13,5 +13,9 @@ def get_repos():
 
 def get_config(name):
 
-	r = requests.get('https://api.github.com/orgs/lrn-guru/repos')
+	request = 'https://raw.github.com/lrn-guru/lrn/master/' + name + '.config.json'
+	r = requests.get(request)
+	return r.json()
+
+
 	
