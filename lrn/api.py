@@ -25,27 +25,25 @@ def get_repos():
 
 	return repo_names
 
-# def get_local_config():
-# 	if os.path.exists('.config.json'):
-# 		path = '.'
-# 	elif os.path.exists('../.config.json'):
-# 		path = '../'
-# 	else:
-# 		path = '../../'
-# 	with open('{}config.json'.format(path), 'r') as j:
-# 		return loads(j.read())
+def get_local_config():
+	if os.path.exists('.config.json'):
+		path = ''
+	elif os.path.exists('../.config.json'):
+		path = '../'
+	else:
+		path = '../../'
+	with open('{}.config.json'.format(path), 'r') as j:
+		return loads(j.read())
 
 def get_config(name):
-	# try:
-	# 	get_local_config()
-	# except IOError:
 	url = 'https://raw.github.com/lrn-guru/learn-{}/master/.config.json'.format(name)
 	r = requests.get(url)
 	return r.json()
 
 def get_task():
+
 	branch = get_branch()
-	config = get_config()
+	config = get_local_config()
 	for lesson in config['lessons']:
 		if lesson['branch'] == branch:
 			break # at the right lesson
@@ -55,5 +53,6 @@ def get_task():
 	return lesson[lrn_task]
 
 def get_branch():
+	#import ipdb; ipdb.set_trace()
 	status = check_output('git branch'.split())
-	return status.split()[2]
+	return status[2:].strip("\n")
