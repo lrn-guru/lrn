@@ -25,7 +25,7 @@ parser = argparse.ArgumentParser(description=description)
 parser.add_argument('command', help='The action to take (list, start, et cetera)')
 # parser.add_argument('-v', '--virtual', help='Whether or not to run lrn in a virtual machine')
 
-args = parser.parse_args()
+args, sub_args = parser.parse_known_args()
 
 projects = api.get_repos()
 
