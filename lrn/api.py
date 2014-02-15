@@ -18,9 +18,10 @@ def get_repos():
 		if (project_name == 'lrn' or project_name == 'lrn-guru.github.io'):
 			continue
 		github_name = project_name[6:]
-		j = get_config(github_name)
-		description = j['short_description']
-		difficulty = j['difficulty']
+		js = get_config(github_name)
+		__import__('ipdb').set_trace()
+		description = js['short_description']
+		difficulty = js['difficulty']
 		repo_names.append((github_name, description, difficulty))
 
 	return repo_names
@@ -32,8 +33,8 @@ def get_local_config():
 		path = '../'
 	else:
 		path = '../../'
-	with open('{}config.json'.format(path), 'r') as j:
-		return loads(j.read())
+	with open('{}config.json'.format(path), 'r') as js:
+		return loads(js.read())
 
 def get_config(name):
 	try:

@@ -43,13 +43,15 @@ def list_projects():
 
 def introduce(name):
 	""" Welcomes a new user to the {name} tutorial."""
-	pass
+	config = api.get_config(name)
+	__import__('ipdb').set_trace()
+	l(config['intruduction'], 'green')
 
 
 def task():
 	""" Informs the user of their current task."""
 	task = api.get_task()
-	print(task)
+	l(task, 'blue')
 
 
 
@@ -58,7 +60,7 @@ def start(name):
 	command = 'git clone {}'.format(url)
 	call(command.split())
 	call('cd {}'.format(name).split())
-	os.environ['LRN_TASK'] = 1
+	os.environ['LRN_TASK'] = '1'
 	introduce(name)
 	task()
 
@@ -75,6 +77,11 @@ def run_tests():
 if args.command == 'list':
 	list_projects()
 elif args.command == 'start':
-	start(sys.argv[-1])
+	# hackish
+	if len(sys.argv) == 3:
+		start(sys.argv[-1])
+	else:
+		l('Error: Specify a tutorial to start.', 'red')
+
 else:
 	print('!')

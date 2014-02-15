@@ -7,10 +7,7 @@ def main():
 		# os.environ['PS1'] = 'lrn: ' + os.environ['PS1']
 		while True:
 			cmd = raw_input("lrn > ")
-			if cmd.startswith('vim'):
-				os.system(cmd)
-			else:
-				print('enter vim')
+			os.system(cmd)
 	except EOFError:
 		print('Exiting lrn...')
 		exit(0)
