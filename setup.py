@@ -6,7 +6,7 @@ setup(
     author=['Razzi Abuissa','Alex Brashear'],
     author_email='alexjbrashear@gmail.com',
     packages=['lrn'],
-    scripts=['bin/lrn.py'],
+    scripts=['bin/lrn', 'bin/lrn.py'],
     url='http://pypi.python.org/pypi/TowelStuff/',
     license='LICENSE.txt',
     description='Useful towel-related stuff.',
