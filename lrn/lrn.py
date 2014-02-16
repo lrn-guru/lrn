@@ -26,6 +26,8 @@ def list_projects():
         l(proj[1].ljust(60), 'blue', False)
         l('*' * proj[2], 'yellow')
 
+    l('')
+
 def introduce():
     """ Welcomes a new user to the {name} tutorial."""
     config = api.get_local_config()

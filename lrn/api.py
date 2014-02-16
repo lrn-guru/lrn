@@ -85,7 +85,7 @@ def get_starting_branch():
 def find_lrn_txt():
     this_dir = '.lrn_task.txt'
     for i in range(4):
-        path = '..' * i + this_dir
+        path = '../' * i + this_dir
         if os.path.exists(path):
             return path
 
