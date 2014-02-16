@@ -32,7 +32,7 @@ def introduce():
     l(config['introduction'], 'green')
 
 
-def task():
+def show_task():
     """ Informs the user of their current task."""
     task = api.get_task()
     l(task['instruction'], 'cyan')
@@ -46,7 +46,7 @@ def start(name):
         command = 'git clone {} .'.format(url)
     else:
         command = 'git clone {}'.format(url)
-        l('Enter `cd {} && lrn resume` to get started.'.format(name))
+        l('Enter `cd learn-{} && lrn resume` to get started.'.format(name))
         exit(0)
 
     dev_null = open(os.devnull, 'w')
@@ -58,7 +58,7 @@ def start(name):
     command = 'git checkout {}'.format(branch)
     call(command.split(), stdout=dev_null, stderr=subprocess.STDOUT)
     introduce()
-    task()
+    show_task()
     start_repl()
 
 
@@ -110,7 +110,7 @@ def progress():
         print('\n')
 
 def resume():
-    task()
+    show_task()
     repl.repl()
 
 def next_task():
@@ -125,7 +125,7 @@ def next_task():
     task = api.get_lrn_task()
     if task <= task_length:
         api.set_lrn_task(task + 1)
-        task()
+        show_task()
     else:
         congrats = lesson['completion']
         l(congrats, 'green')
@@ -135,7 +135,7 @@ def next_task():
         # get next branch
         next_branch = config['lessons'][index + 1]['branch']
         call('git checkout {}'.format(next_branch), stdout=open('/dev/null', 'w'), stderr=STDOUT)
-        task()
+        show_task()
 
 
 def main():
