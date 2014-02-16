@@ -5,7 +5,7 @@ import argparse
 import sys
 import os
 
-from termcolor import cprint
+from termcolor import colored, cprint
 
 from subprocess import call
 
@@ -81,12 +81,24 @@ def progress():
 	#displaying completed or incompleted lessons
 	#get local config to parse:
 
+	############# set up progress report #######################
+	l('-' * 73)
+	cprint('Progress Report: \n\n', 'cyan')
+	word = colored('  Complete:   ', 'cyan')
+	c_text = colored('   ', 'green', attrs=['reverse', 'blink'])
+	print(word + '[' + c_text + ']')
+
+	word = colored('  Incomplete: ', 'cyan')
+	i_text = colored('   ', 'red', attrs=['reverse', 'blink'])
+	print(word + '[' + i_text + ']\n')
+	############# end set up              ######################
+
 	full_local_config = api.get_local_config()
 	if full_local_config == 1:
 		return
 	else:
 		for j in full_local_config['lessons']:
-			print(' [ ] ' + j['name'])
+			print('  [' + i_text + ']: ' + j['name'])
 
 
 if args.command == 'list':
