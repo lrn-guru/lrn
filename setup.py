@@ -6,7 +6,6 @@ setup(
     author='Razzi Abuissa + Alex Brashear + Peter Yin',
     author_email='py.peteryin@gmail.com',
     packages=['lrn'],
-    scripts=['bin/lrn.py'],
     url='https://github.com/lrn-guru/lrn',
     license='LICENSE.txt',
     description='The command line interface for the lrn tutorial platform',
