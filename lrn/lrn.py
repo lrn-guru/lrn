@@ -29,13 +29,13 @@ def list_projects():
 def introduce():
     """ Welcomes a new user to the {name} tutorial."""
     config = api.get_local_config()
-    l(config['introduction'], 'green')
+    l(config['introduction' + '\n'], 'green')
 
 
 def show_task():
     """ Informs the user of their current task."""
     task = api.get_task()
-    l(task['instruction'], 'cyan')
+    l(task['instruction' + '\n'], 'cyan')
 
 
 
