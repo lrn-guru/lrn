@@ -6,7 +6,6 @@ setup(
     author='Razzi Abuissa + Alex Brashear + Peter Yin',
     author_email='py.peteryin@gmail.com',
     url='https://github.com/lrn-guru',
-    packages=['lrn', 'lrn.api', 'lrn.repl'],
-    scripts=['lrn/lrn'],
+    packages=['lrn'],
+    scripts=['lrn/lrn', 'lrn/lrn.py', 'lrn/api.py', 'lrn/repl.py'],
 )
-
