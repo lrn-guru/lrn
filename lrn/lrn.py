@@ -47,9 +47,8 @@ def introduce():
     l(config['introduction'], 'green')
 
 
-def task(number=None):
+def task():
     """ Informs the user of their current task."""
-    # If the task number is not none, ask the api for that
     task = api.get_task()
     l(task['instruction'], 'cyan')
 
@@ -63,7 +62,8 @@ def start(name):
     else:
         command = 'git clone {}'.format(url)
         l('Enter `cd {}` to get started.'.format(name))
-    call(command.split())
+    dev_null = open(os.devnull, 'w')
+    call(command.split(), stdout=dev_null)
     api.set_lrn_task(0)
 
     branch = api.get_starting_branch()

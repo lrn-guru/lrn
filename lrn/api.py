@@ -2,8 +2,6 @@ import os
 from json import loads
 from subprocess import check_output
 
-# from ipdb import set_trace
-
 import requests
 
 def get_repos():
@@ -33,8 +31,8 @@ def get_local_config():
     elif os.path.exists('../../.config.json'):
         path = '../../'
     else:
-        print('You are not currently in a tutorial')
-        return 1
+        print('You are not currently in a tutorial directory.')
+        exit(1)
     with open('{}.config.json'.format(path), 'r') as js:
         return loads(js.read())
 
@@ -42,17 +40,6 @@ def get_config(name):
     url = 'https://raw.github.com/lrn-guru/learn-{}/master/.config.json'.format(name)
     r = requests.get(url)
     return r.json()
-
-
-def get_local_config():
-    if os.path.exists('.config.json'):
-        path = ''
-    elif os.path.exists('../.config.json'):
-        path = '../'
-    else:
-        path = '../../'
-    with open('{}.config.json'.format(path), 'r') as js:
-        return loads(js.read())
 
 
 def get_task():
