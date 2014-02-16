@@ -77,6 +77,17 @@ def hint():
 	task_json = api.get_task()
 	print(task_json['hint'])
 
+def progress():
+	#displaying completed or incompleted lessons
+	#get local config to parse:
+
+	full_local_config = api.get_local_config()
+	if full_local_config == 1:
+		return
+	else:
+		for j in full_local_config['lessons']:
+			print(' [ ] ' + j['name'])
+
 
 if args.command == 'list':
 	list_projects()
@@ -87,5 +98,7 @@ elif args.command == 'start':
 		l('Error: Specify a tutorial to start.', 'red')
 elif args.command == 'hint':
 	hint()
+elif args.command == 'progress':
+	progress()
 else:
 	print('!')
