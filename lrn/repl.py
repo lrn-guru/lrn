@@ -1,18 +1,19 @@
 import os
 
 import api
+import lrn
 
 l = api.l
 
-from subprocess import check_output
+from subprocess import call
 
 def check_progress(cmd):
     task = api.get_task()
     test = task['test']
     test_dir = api.get_tests_dir()
 
-    command = 'python {}/{}.py'.format(test_dir, test)
-    status = check_output(command.split())
+    command = "python {}/{}.py {}".format(test_dir, test, cmd)
+    status = call(command.split())
     return status
 
 def repl():
@@ -31,8 +32,8 @@ def repl():
             outcome = check_progress(cmd)
             print("REPL DEBUG")
             __import__('ipdb').set_trace()
-            if outcome == "0":
-                api.next()
+            if outcome == 0:
+                lrn.next()
 
 
     except EOFError:
