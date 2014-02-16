@@ -1,6 +1,10 @@
 import os
 
-from api import api
+try:
+    from lrn.api import api
+except:
+    from api import api
+
 l = api.l
 
 from subprocess import check_output
