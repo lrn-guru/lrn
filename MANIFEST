@@ -4,6 +4,4 @@ README.txt
 requirements.txt
 setup.py
 lrn/__init__.py
-lrn/api.py
 lrn/lrn
-lrn/repl.py
