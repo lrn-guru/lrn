@@ -67,16 +67,18 @@ def find_lrn_txt():
     for i in range(4):
         path = '..' * i + this_dir
         if os.path.exists(path):
-            __import__('ipdb').set_trace()
             return path
-    # If it was not found,
+
+    # If it was not found, make it.
+    return this_dir
+
 
 def set_lrn_task(number):
-    lrn_json = find_lrn_txt()
-    with open(lrn_json, 'w') as f:
-        f.write(number)
+    lrn_txt = find_lrn_txt()
+    with open(lrn_txt, 'w') as f:
+        f.write(str(number))
 
 def get_lrn_task():
-    lrn_json = find_lrn_txt()
-    with open(lrn_json, 'r') as f:
+    lrn_txt = find_lrn_txt()
+    with open(lrn_txt, 'r') as f:
         return int(f.read())

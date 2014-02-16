@@ -7,7 +7,7 @@ import os
 
 from termcolor import cprint
 
-from subprocess import call
+from subprocess import call, check_output
 
 import api
 
@@ -50,18 +50,20 @@ def introduce():
 def task(number=None):
     """ Informs the user of their current task."""
     # If the task number is not none, ask the api for that
-    task = api.get_task(number)
+    task = api.get_task()
     l(task['instruction'], 'cyan')
 
 
 
 def start(name):
     url = 'https://github.com/lrn-guru/learn-{}.git'.format(name)
-    command = 'git clone {}'.format(url)
+    # if there are no files, work here
+    if len(check_output('ls -a'.split())) == 5:
+        command = 'git clone {} .'.format(url)
+    else:
+        command = 'git clone {}'.format(url)
+        l('Enter `cd {}` to get started.'.format(name))
     call(command.split())
-    folder = 'learn-{}'.format(name)
-    os.system('cd {}'.format(folder))
-    os.chdir(folder)
     api.set_lrn_task(0)
 
     branch = api.get_starting_branch()
@@ -69,6 +71,7 @@ def start(name):
     os.system(command)
     introduce()
     task()
+    start_repl()
 
 
 def run_tests():
@@ -83,6 +86,13 @@ def hint():
     task_json = api.get_task()
     print(task_json['hint'])
 
+def start_repl():
+    """
+    Put the user into an interactive session where
+    we can monitor their output. They exit with control d.
+    cd into the right directory if possible.
+    """
+    pass
 
 if args.command == 'list':
     list_projects()
