@@ -92,12 +92,10 @@ def progress():
     l('-' * 73)
     cprint('Progress Report: \n\n', 'cyan')
     word = colored('  Complete:   ', 'cyan')
-    c_text = colored('   ', 'green', attrs=['reverse', 'blink'])
-    print(word + '[' + c_text + ']')
+    print(word + '[x]')
 
     word = colored('  Incomplete: ', 'cyan')
-    i_text = colored('   ', 'red', attrs=['reverse', 'blink'])
-    print(word + '[' + i_text + ']\n')
+    print(word + '[o]\n')
     ############# end set up              ######################
 
     full_local_config = api.get_local_config()
@@ -105,11 +103,12 @@ def progress():
         return
     else:
         for j in full_local_config['lessons']:
-            for i in j['tasks']:
-                ###
             text = colored(j['name'], 'blue')
-            print('  [' + i_text + ']: ' + text)
-        print('\n')
+            print('  [o] ' + text + '\n')
+            
+            for i in range(len(j['tasks'])):
+                text = colored(i, 'green')
+                print('\t[o] task ' + text + '\n')
 
 def resume():
     show_task()
