@@ -95,7 +95,7 @@ def progress():
     print(word + '[x]')
 
     word = colored('  Incomplete: ', 'cyan')
-    print(word + '[o]\n')
+    print(word + '[ ]\n')
     ############# end set up              ######################
 
     full_local_config = api.get_local_config()
@@ -104,11 +104,10 @@ def progress():
     else:
         for j in full_local_config['lessons']:
             text = colored(j['name'], 'blue')
-            print('  [o] ' + text + '\n')
-
+            print('  [ ] ' + text)
             for i in range(len(j['tasks'])):
                 text = colored(i, 'green')
-                print('\t[o] task ' + text + '\n')
+                print('\t[ ] task ' + text)
 
 def resume():
     show_task()
