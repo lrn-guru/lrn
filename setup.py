@@ -1,16 +1,16 @@
 from distutils.core import setup
 
 setup(
-    name='lrn-guru',
-    version='0.0.2',
-    author='Razzi Abuissa + Alex Brashear',
-    author_email='alexjbrashear@gmail.com',
+    name='lrn',
+    version='0.0.3',
+    author='Razzi Abuissa + Alex Brashear + Peter Yin',
+    author_email='py.peteryin@gmail.com',
     packages=['lrn'],
     scripts=['bin/lrn.py'],
-    url='http://pypi.python.org/pypi/TowelStuff/',
+    url='https://github.com/lrn-guru/lrn',
     license='LICENSE.txt',
     description='The command line interface for the lrn tutorial platform',
-    long_description=open('README.md').read(),
+    long_description= open('README.txt').read(),
 	install_requires=[],
 )
 
