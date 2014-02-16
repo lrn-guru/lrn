@@ -30,8 +30,11 @@ def get_local_config():
 		path = ''
 	elif os.path.exists('../.config.json'):
 		path = '../'
-	else:
+	elif os.path.exists('../../.config.json'):
 		path = '../../'
+	else:
+		print('You are not currently in a tutorial')
+		return 1
 	with open('{}.config.json'.format(path), 'r') as js:
 		return loads(js.read())
 

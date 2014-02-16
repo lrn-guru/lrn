@@ -12,5 +12,10 @@ setup(
     description='The command line interface for the lrn tutorial platform',
     long_description= open('README.txt').read(),
 	install_requires=[],
+    entry_points={
+        'console_scripts': [
+            'lrn = lrn.lrn:main',
+        ],
+    },
 )
 
