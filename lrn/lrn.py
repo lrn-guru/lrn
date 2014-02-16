@@ -7,12 +7,8 @@ import os
 import subprocess
 from subprocess import call, check_output
 
-try:
-    from lrn.api import api
-    from lrn.repl import repl
-except:
-    from api import api
-    from repl import repl
+import api
+import repl
 
 l = api.l
 

@@ -1,9 +1,6 @@
 import os
 
-try:
-    from lrn.api import api
-except:
-    from api import api
+import api
 
 l = api.l
 
