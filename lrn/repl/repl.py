@@ -19,11 +19,16 @@ def repl():
         # os.environ['OLD_PS1'] = os.environ['PS1']
         # os.environ['PS1'] = 'lrn: ' + os.environ['PS1']
         while True:
-            l('lrn ', 'green', False)
+            l('lrn ', 'cyan', False)
             l('> ', 'blue', False)
             cmd = raw_input('')
             os.system(cmd)
             outcome = check_progress(cmd)
+            __import__('ipdb').set_trace()
+            if outcome == "0":
+                api.next()
+
+
     except EOFError:
         print('Exiting lrn...')
         exit(0)

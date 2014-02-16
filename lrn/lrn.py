@@ -76,7 +76,7 @@ def start_repl():
     we can monitor their output. They exit with control d.
     cd into the right directory if possible.
     """
-    repl()
+    repl.repl()
 
 
 def progress():
