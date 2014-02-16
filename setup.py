@@ -14,7 +14,7 @@ setup(
 	install_requires=[],
     entry_points={
         'console_scripts': [
-            'lrn = lrn.main:main',
+            'lrn = lrn.lrn:main',
         ],
     },
 )
