@@ -102,6 +102,7 @@ def progress():
     if full_local_config == 1:
         return
     else:
+        branch = api.get_branch()
         for j in full_local_config['lessons']:
             text = colored(j['name'], 'blue')
             print('  [ ] ' + text)
