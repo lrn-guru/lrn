@@ -8,7 +8,6 @@ l = api.l
 from subprocess import call
 
 def check_progress(cmd):
-    import ipdb; ipdb.set_trace()
     task = api.get_task()
     test = task['test']
     test_dir = api.get_tests_dir()
@@ -20,7 +19,6 @@ def check_progress(cmd):
 def repl():
     try:
         while True:
-            import ipdb; ipdb.set_trace()
             l('lrn ', 'cyan', False)
             l('> ', 'blue', False)
             cmd = raw_input('')
