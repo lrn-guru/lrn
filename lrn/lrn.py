@@ -92,9 +92,8 @@ def progress():
 
     config = api.get_local_config()
     branch = api.get_branch()
-    task = api.get_task()
+    task_number = api.get_lrn_task()
     # get the highest lesson completed
-    __import__('ipdb').set_trace()
     for index, lesson in enumerate(config['lessons']):
         if lesson['branch'] == branch:
             break
@@ -109,7 +108,7 @@ def progress():
 
         for i in range(len(lesson['tasks'])):
             text = colored(i, 'green')
-            if i < task:
+            if i < task_number:
                 print('\t[x] task ' + text)
             else:
                 print('\t[ ] task ' + text)
@@ -160,7 +159,7 @@ def main():
     elif args.command == 'next':
         next_task()
     else:
-        print('!')
+        print('Command not recogned. Enter `lrn` for commands.')
 
 if __name__ == '__main__':
 
