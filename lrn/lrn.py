@@ -35,7 +35,7 @@ def introduce():
 def show_task():
     """ Informs the user of their current task."""
     task = api.get_task()
-    l(task['instruction' + '\n'], 'cyan')
+    l(task['instruction'] + '\n', 'cyan')
 
 
 
