@@ -105,6 +105,8 @@ def progress():
         return
     else:
         for j in full_local_config['lessons']:
+            for i in j['tasks']:
+                ###
             text = colored(j['name'], 'blue')
             print('  [' + i_text + ']: ' + text)
         print('\n')
@@ -159,13 +161,15 @@ def main():
 
 if __name__ == '__main__':
 
-    help_message = 'Need to add arguments for lrn, possible arguments:\n\n' + 
-                    '\tlist     ----  Gives a list of all available tutorials.\n' + 
-                    '\tstart    ----  Starts a lesson.\n' + 
-                    '\tprogress ----  Displays your lesson progress in a tutorial\n' +
-                    '\thint     ----  Gives a hint for the current problem\n' + 
-                    '\tresume   ----  Resumes the tutorial after user exits\n' + 
-                    '\tnext     ----  Advances to the next lesson\n'
+    help_message = (
+        'Available commands:\n\n' 
+        '\tlist     ----  Gives a list of all available tutorials.\n'  
+        '\tstart    ----  Starts a lesson.\n'  
+        '\tprogress ----  Displays your lesson progress in a tutorial\n' 
+        '\thint     ----  Gives a hint for the current problem\n'  
+        '\tresume   ----  Resumes the tutorial after user exits\n'  
+        '\tnext     ----  Advances to the next lesson\n'
+    )
     if (len(sys.argv) == 1):
         print(help_message)
         exit(0)
