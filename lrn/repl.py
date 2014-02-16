@@ -23,8 +23,13 @@ def repl():
             l('lrn ', 'cyan', False)
             l('> ', 'blue', False)
             cmd = raw_input('')
-            os.system(cmd)
+            if 'cd ' in cmd:
+                folder = cmd[3:]
+                os.chdir(folder)
+            else:
+                os.system(cmd)
             outcome = check_progress(cmd)
+            print("REPL DEBUG")
             __import__('ipdb').set_trace()
             if outcome == "0":
                 api.next()

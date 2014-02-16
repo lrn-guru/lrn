@@ -3,6 +3,7 @@ import argparse
 import sys
 import os
 
+from termcolor import colored, cprint
 
 import subprocess
 from subprocess import call, check_output
@@ -87,14 +88,14 @@ def progress():
 
     ############# set up progress report #######################
     l('-' * 73)
-    # cprint('Progress Report: \n\n', 'cyan')
-    # word = colored('  Complete:   ', 'cyan')
-    # c_text = colored('   ', 'green', attrs=['reverse', 'blink'])
-    # print(word + '[' + c_text + ']')
+    cprint('Progress Report: \n\n', 'cyan')
+    word = colored('  Complete:   ', 'cyan')
+    c_text = colored('   ', 'green', attrs=['reverse', 'blink'])
+    print(word + '[' + c_text + ']')
 
-    # word = colored('  Incomplete: ', 'cyan')
-    # i_text = colored('   ', 'red', attrs=['reverse', 'blink'])
-    # print(word + '[' + i_text + ']\n')
+    word = colored('  Incomplete: ', 'cyan')
+    i_text = colored('   ', 'red', attrs=['reverse', 'blink'])
+    print(word + '[' + i_text + ']\n')
     ############# end set up              ######################
 
     full_local_config = api.get_local_config()
@@ -102,10 +103,21 @@ def progress():
         return
     else:
         for j in full_local_config['lessons']:
-            pass
-            # text = colored(j['name'], 'blue')
-            # print('  [' + i_text + ']: ' + text)
-        # print('\n')
+            text = colored(j['name'], 'blue')
+            print('  [' + i_text + ']: ' + text)
+        print('\n')
+
+def resume():
+    task()
+    repl.repl()
+
+def next():
+    # find how many tasks in this lesson
+    config = api.get_local_config()
+    branch = api.get_branch()
+    __import__('ipdb').set_trace()
+    task = api.get_lrn_task()
+    api.set_lrn_task(task + 1)
 
 def main():
     if args.command == 'list':
@@ -119,6 +131,10 @@ def main():
         hint()
     elif args.command == 'progress':
         progress()
+    elif args.command == 'resume':
+        resume()
+    elif args.command == 'next':
+        next()
     else:
         print('!')
 
