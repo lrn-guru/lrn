@@ -5,3 +5,4 @@ requirements.txt
 setup.py
 lrn/__init__.py
 lrn/lrn
+lrn/lrn.py
