@@ -7,7 +7,7 @@ setup(
     author_email='py.peteryin@gmail.com',
     url='https://github.com/lrn-guru',
     packages=['lrn'],
-    scripts=['lrn/lrn', 'lrn/lrn.py', 'lrn/api.py', 'lrn/repl.py'],
+    scripts=['rlwrap', 'lrn/lrn', 'lrn/lrn.py', 'lrn/api.py', 'lrn/repl.py'],
     install_requires=[
         'requests==2.2.1',
         'termcolor==1.1.0'
