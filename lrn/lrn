@@ -7,8 +7,13 @@ import os
 import subprocess
 from subprocess import call, check_output
 
-from api import api
-from repl import repl
+try:
+    from lrn.api import api
+    from lrn.repl import repl
+except:
+    from api import api
+    from repl import repl
+
 l = api.l
 
 projects = api.get_repos()
@@ -77,6 +82,7 @@ def start_repl():
     cd into the right directory if possible.
     """
     repl.repl()
+
 
 
 def progress():
