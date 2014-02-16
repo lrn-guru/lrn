@@ -111,7 +111,7 @@ def resume():
     task()
     repl.repl()
 
-def next_lesson():
+def next_task():
     # find how many tasks in this lesson
     config = api.get_local_config()
     branch = api.get_branch()
@@ -134,7 +134,7 @@ def main():
     elif args.command == 'resume':
         resume()
     elif args.command == 'next':
-        next_lesson()
+        next_task()
     else:
         print('!')
 

@@ -30,10 +30,8 @@ def repl():
             else:
                 os.system(cmd)
             outcome = check_progress(cmd)
-            print("REPL DEBUG")
-            __import__('ipdb').set_trace()
             if outcome == 0:
-                lrn.next()
+                lrn.next_task()
 
 
     except EOFError:
