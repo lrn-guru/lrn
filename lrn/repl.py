@@ -19,6 +19,7 @@ def check_progress(cmd):
 def repl():
     try:
         while True:
+            import ipdb; ipdb.set_trace()
             l('lrn ', 'cyan', False)
             l('> ', 'blue', False)
             cmd = raw_input('')
