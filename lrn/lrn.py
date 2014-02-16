@@ -6,7 +6,7 @@ import os
 from termcolor import colored, cprint
 
 import subprocess
-from subprocess import call, check_output
+from subprocess import call, check_output, STDOUT
 
 import api
 import repl
@@ -117,9 +117,26 @@ def next_task():
     # find how many tasks in this lesson
     config = api.get_local_config()
     branch = api.get_branch()
-    __import__('ipdb').set_trace()
+    for index, lesson in enumerate(config['lessons']):
+        if lesson['branch'] == branch:
+            break # we have the right lesson
+
+    task_length = len(lesson['tasks'])
     task = api.get_lrn_task()
-    api.set_lrn_task(task + 1)
+    if task <= task_length:
+        api.set_lrn_task(task + 1)
+        task()
+    else:
+        congrats = lesson['completion']
+        l(congrats, 'green')
+        api.set_lrn_task(0)
+        # stash changes
+        call('git stash'.split(), stdout=open('/dev/null', 'w'), stderr=STDOUT)
+        # get next branch
+        next_branch = config['lessons'][index + 1]['branch']
+        call('git checkout {}'.format(next_branch), stdout=open('/dev/null', 'w'), stderr=STDOUT)
+        task()
+
 
 def main():
     if args.command == 'list':
