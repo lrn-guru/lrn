@@ -18,8 +18,6 @@ def check_progress(cmd):
 
 def repl():
     try:
-        # os.environ['OLD_PS1'] = os.environ['PS1']
-        # os.environ['PS1'] = 'lrn: ' + os.environ['PS1']
         while True:
             l('lrn ', 'cyan', False)
             l('> ', 'blue', False)
@@ -33,11 +31,9 @@ def repl():
             if outcome == 0:
                 lrn.next_task()
 
-
-    except EOFError:
-        print('Exiting lrn...')
+    except (EOFError, KeyboardInterrupt):
+        print('Exiting lrn. Enter `lrn resume` to resume.')
         exit(0)
-        # os.environ['PS1'] = os.environ['OLD_PS1']
 
 
 
