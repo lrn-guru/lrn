@@ -102,17 +102,25 @@ def progress():
 			print('  [' + i_text + ']: ' + text)
 		print('\n')
 
-
-if args.command == 'list':
-	list_projects()
-elif args.command == 'start':
-	if len(sys.argv) == 3:
-		start(sys.argv[-1])
+def main():
+	if args.command == 'list':
+		list_projects()
+	elif args.command == 'start':
+		if len(sys.argv) == 3:
+			start(sys.argv[-1])
+		else:
+			l('Error: Specify a tutorial to start.', 'red')
+	elif args.command == 'hint':
+		hint()
+	elif args.command == 'progress':
+		progress()
 	else:
-		l('Error: Specify a tutorial to start.', 'red')
-elif args.command == 'hint':
-	hint()
-elif args.command == 'progress':
-	progress()
-else:
-	print('!')
+		print('!')
+
+if __name__ == '__main__':
+	main()
+
+
+
+
+	
