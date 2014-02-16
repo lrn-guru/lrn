@@ -1,8 +1,22 @@
+from __future__ import print_function
+
 import os
+
+from termcolor import cprint
 from json import loads
 from subprocess import check_output
 
 import requests
+
+def l(s, color=None, newline=True):
+    ''' Print a string with a color, no endline.'''
+    opts = {'end': '\n' if newline else ''}
+    if color:
+        cprint(s, color, **opts)
+    else:
+        print(s, **opts)
+
+
 
 def get_repos():
     # set_trace()
@@ -41,6 +55,13 @@ def get_config(name):
     r = requests.get(url)
     return r.json()
 
+
+def get_tests_dir():
+    files = '.tests'
+    for i in range(4):
+        path = '../' * i + files
+        if os.path.exists(path):
+            return path
 
 def get_task():
     branch = get_branch()
