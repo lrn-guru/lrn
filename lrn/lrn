@@ -1,32 +1,15 @@
 #!/usr/bin/env python
-from __future__ import print_function
-
 import argparse
 import sys
 import os
 
-from termcolor import colored, cprint
 
+import subprocess
 from subprocess import call, check_output
 
-import api
-
-def l(s, color=None, newline=True):
-    ''' Print a string with a color, no endline.'''
-    opts = {'end': '\n' if newline else ''}
-    if color:
-        cprint(s, color, **opts)
-    else:
-        print(s, **opts)
-
-
-description = 'lrn -- the interactive tutorial platform'
-parser = argparse.ArgumentParser(description=description)
-
-parser.add_argument('command', help='The action to take (list, start, et cetera)')
-# parser.add_argument('-v', '--virtual', help='Whether or not to run lrn in a virtual machine')
-
-args, sub_args = parser.parse_known_args()
+from api import api
+from repl import repl
+l = api.l
 
 projects = api.get_repos()
 
@@ -47,9 +30,8 @@ def introduce():
     l(config['introduction'], 'green')
 
 
-def task(number=None):
+def task():
     """ Informs the user of their current task."""
-    # If the task number is not none, ask the api for that
     task = api.get_task()
     l(task['instruction'], 'cyan')
 
@@ -62,13 +44,15 @@ def start(name):
         command = 'git clone {} .'.format(url)
     else:
         command = 'git clone {}'.format(url)
-        l('Enter `cd {}` to get started.'.format(name))
-    call(command.split())
+        # l('Enter `cd {}` to get started.'.format(name))
+
+    dev_null = open(os.devnull, 'w')
+    call(command.split(), stdout=dev_null, stderr=subprocess.STDOUT)
     api.set_lrn_task(0)
 
     branch = api.get_starting_branch()
     command = 'git checkout {}'.format(branch)
-    os.system(command)
+    call(command.split(), stdout=dev_null, stderr=subprocess.STDOUT)
     introduce()
     task()
     start_repl()
@@ -92,7 +76,8 @@ def start_repl():
     we can monitor their output. They exit with control d.
     cd into the right directory if possible.
     """
-    pass
+    repl()
+
 
 def progress():
     #displaying completed or incompleted lessons
@@ -100,14 +85,14 @@ def progress():
 
     ############# set up progress report #######################
     l('-' * 73)
-    cprint('Progress Report: \n\n', 'cyan')
-    word = colored('  Complete:   ', 'cyan')
-    c_text = colored('   ', 'green', attrs=['reverse', 'blink'])
-    print(word + '[' + c_text + ']')
+    # cprint('Progress Report: \n\n', 'cyan')
+    # word = colored('  Complete:   ', 'cyan')
+    # c_text = colored('   ', 'green', attrs=['reverse', 'blink'])
+    # print(word + '[' + c_text + ']')
 
-    word = colored('  Incomplete: ', 'cyan')
-    i_text = colored('   ', 'red', attrs=['reverse', 'blink'])
-    print(word + '[' + i_text + ']\n')
+    # word = colored('  Incomplete: ', 'cyan')
+    # i_text = colored('   ', 'red', attrs=['reverse', 'blink'])
+    # print(word + '[' + i_text + ']\n')
     ############# end set up              ######################
 
     full_local_config = api.get_local_config()
@@ -115,9 +100,10 @@ def progress():
         return
     else:
         for j in full_local_config['lessons']:
-            text = colored(j['name'], 'blue')
-            print('  [' + i_text + ']: ' + text)
-        print('\n')
+            pass
+            # text = colored(j['name'], 'blue')
+            # print('  [' + i_text + ']: ' + text)
+        # print('\n')
 
 def main():
     if args.command == 'list':
@@ -135,4 +121,10 @@ def main():
         print('!')
 
 if __name__ == '__main__':
+    description = 'lrn -- the interactive tutorial platform'
+    parser = argparse.ArgumentParser(description=description)
+    parser.add_argument('command', help='The action to take (list, start, et cetera)')
+    # parser.add_argument('-v', '--virtual', help='Whether or not to run lrn in a virtual machine')
+
+    args, sub_args = parser.parse_known_args()
     main()

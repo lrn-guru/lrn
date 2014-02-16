@@ -1,10 +1,22 @@
+from __future__ import print_function
+
 import os
+
+from termcolor import cprint
 from json import loads
 from subprocess import check_output
 
-# from ipdb import set_trace
-
 import requests
+
+def l(s, color=None, newline=True):
+    ''' Print a string with a color, no endline.'''
+    opts = {'end': '\n' if newline else ''}
+    if color:
+        cprint(s, color, **opts)
+    else:
+        print(s, **opts)
+
+
 
 def get_repos():
     # set_trace()
@@ -33,8 +45,8 @@ def get_local_config():
     elif os.path.exists('../../.config.json'):
         path = '../../'
     else:
-        print('You are not currently in a tutorial')
-        return 1
+        print('You are not currently in a tutorial directory.')
+        exit(1)
     with open('{}.config.json'.format(path), 'r') as js:
         return loads(js.read())
 
@@ -44,16 +56,12 @@ def get_config(name):
     return r.json()
 
 
-def get_local_config():
-    if os.path.exists('.config.json'):
-        path = ''
-    elif os.path.exists('../.config.json'):
-        path = '../'
-    else:
-        path = '../../'
-    with open('{}.config.json'.format(path), 'r') as js:
-        return loads(js.read())
-
+def get_tests_dir():
+    files = '.tests'
+    for i in range(4):
+        path = '../' * i + files
+        if os.path.exists(path):
+            return path
 
 def get_task():
     branch = get_branch()
