@@ -3,4 +3,6 @@ CHANGES.txt
 requirements.txt
 setup.py
 bin/lrn.py
+lrn/api.py
 lrn/lrn.py
+lrn/repl.py

@@ -5,7 +5,7 @@ import argparse
 import sys
 import os
 
-from termcolor import cprint
+from termcolor import colored, cprint
 
 from subprocess import call, check_output
 
@@ -94,14 +94,45 @@ def start_repl():
     """
     pass
 
-if args.command == 'list':
-    list_projects()
-elif args.command == 'start':
-    if len(sys.argv) == 3:
-        start(sys.argv[-1])
+def progress():
+    #displaying completed or incompleted lessons
+    #get local config to parse:
+
+    ############# set up progress report #######################
+    l('-' * 73)
+    cprint('Progress Report: \n\n', 'cyan')
+    word = colored('  Complete:   ', 'cyan')
+    c_text = colored('   ', 'green', attrs=['reverse', 'blink'])
+    print(word + '[' + c_text + ']')
+
+    word = colored('  Incomplete: ', 'cyan')
+    i_text = colored('   ', 'red', attrs=['reverse', 'blink'])
+    print(word + '[' + i_text + ']\n')
+    ############# end set up              ######################
+
+    full_local_config = api.get_local_config()
+    if full_local_config == 1:
+        return
     else:
-        l('Error: Specify a tutorial to start.', 'red')
-elif args.command == 'hint':
-    hint()
-else:
-    print('!')
+        for j in full_local_config['lessons']:
+            text = colored(j['name'], 'blue')
+            print('  [' + i_text + ']: ' + text)
+        print('\n')
+
+def main():
+    if args.command == 'list':
+        list_projects()
+    elif args.command == 'start':
+        if len(sys.argv) == 3:
+            start(sys.argv[-1])
+        else:
+            l('Error: Specify a tutorial to start.', 'red')
+    elif args.command == 'hint':
+        hint()
+    elif args.command == 'progress':
+        progress()
+    else:
+        print('!')
+
+if __name__ == '__main__':
+    main()

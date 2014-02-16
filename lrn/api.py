@@ -25,6 +25,18 @@ def get_repos():
 
     return repo_names
 
+def get_local_config():
+    if os.path.exists('.config.json'):
+        path = ''
+    elif os.path.exists('../.config.json'):
+        path = '../'
+    elif os.path.exists('../../.config.json'):
+        path = '../../'
+    else:
+        print('You are not currently in a tutorial')
+        return 1
+    with open('{}.config.json'.format(path), 'r') as js:
+        return loads(js.read())
 
 def get_config(name):
     url = 'https://raw.github.com/lrn-guru/learn-{}/master/.config.json'.format(name)
