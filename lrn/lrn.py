@@ -46,10 +46,12 @@ def start(name):
         command = 'git clone {} .'.format(url)
     else:
         command = 'git clone {}'.format(url)
-        # l('Enter `cd {}` to get started.'.format(name))
+        l('Enter `cd {} && lrn resume` to get started.'.format(name))
+        exit(0)
 
     dev_null = open(os.devnull, 'w')
     call(command.split(), stdout=dev_null, stderr=subprocess.STDOUT)
+
     api.set_lrn_task(0)
 
     branch = api.get_starting_branch()
