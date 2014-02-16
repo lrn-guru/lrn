@@ -98,7 +98,9 @@ def progress():
 		return
 	else:
 		for j in full_local_config['lessons']:
-			print('  [' + i_text + ']: ' + j['name'])
+			text = colored(j['name'], 'blue')
+			print('  [' + i_text + ']: ' + text)
+		print('\n')
 
 
 if args.command == 'list':
