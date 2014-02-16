@@ -8,6 +8,7 @@ l = api.l
 from subprocess import call
 
 def check_progress(cmd):
+    import ipdb; ipdb.set_trace()
     task = api.get_task()
     test = task['test']
     test_dir = api.get_tests_dir()
