@@ -125,7 +125,7 @@ def next_task():
 
     task_length = len(lesson['tasks'])
     task = api.get_lrn_task()
-    if task <= task_length:
+    if task < task_length:
         api.set_lrn_task(task + 1)
         show_task()
     else:
