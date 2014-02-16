@@ -3,7 +3,7 @@ CHANGES.txt
 README.txt
 requirements.txt
 setup.py
-bin/lrn.py
+lrn/__init__.py
 lrn/api.py
-lrn/lrn.py
+lrn/lrn
 lrn/repl.py
