@@ -2,6 +2,7 @@
 CHANGES.txt
 README.txt
 requirements.txt
+rlwrap
 setup.py
 lrn/__init__.py
 lrn/api.py
