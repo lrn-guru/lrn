@@ -88,26 +88,28 @@ def progress():
     #displaying completed or incompleted lessons
     #get local config to parse:
 
-    ############# set up progress report #######################
-    l('-' * 73)
-    cprint('Progress Report: \n\n', 'cyan')
-    word = colored('  Complete:   ', 'cyan')
-    print(word + '[x]')
+    config = api.get_local_config()
+    branch = api.get_branch()
+    task = api.get_task()
+    # get the highest lesson completed
+    __import__('ipdb').set_trace()
+    for index, lesson in enumerate(config['lessons']):
+        if lesson['branch'] == branch:
+            break
 
-    word = colored('  Incomplete: ', 'cyan')
-    print(word + '[ ]\n')
-    ############# end set up              ######################
-
-    full_local_config = api.get_local_config()
-    if full_local_config == 1:
-        return
-    else:
-        branch = api.get_branch()
-        for j in full_local_config['lessons']:
-            text = colored(j['name'], 'blue')
+    for lesson in config['lessons']:
+        index -= 1
+        text = colored(lesson['name'], 'blue')
+        if index > 0:
+            print('  [x] ' + text)
+        else:
             print('  [ ] ' + text)
-            for i in range(len(j['tasks'])):
-                text = colored(i, 'green')
+
+        for i in range(len(lesson['tasks'])):
+            text = colored(i, 'green')
+            if i < task:
+                print('\t[x] task ' + text)
+            else:
                 print('\t[ ] task ' + text)
 
 def resume():
@@ -162,12 +164,12 @@ if __name__ == '__main__':
 
     help_message = (
         'Available commands:\n\n'
-        '\tlist     ----  Gives a list of all available tutorials.\n'
-        '\tstart    ----  Starts a lesson.\n'
-        '\tprogress ----  Displays your lesson progress in a tutorial\n'
-        '\thint     ----  Gives a hint for the current problem\n'
-        '\tresume   ----  Resumes the tutorial after user exits\n'
-        '\tnext     ----  Advances to the next lesson\n'
+        '\tlist     ----  Give a list of all available tutorials.\n'
+        '\tstart    ----  Start a lesson.\n'
+        '\tprogress ----  Display your lesson progress in a tutorial\n'
+        '\thint     ----  Give a hint for the current problem\n'
+        '\tresume   ----  Resume the tutorial after user exits\n'
+        '\tnext     ----  Advance to the next lesson\n'
     )
     if (len(sys.argv) == 1):
         print(help_message)
