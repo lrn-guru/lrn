@@ -1,7 +1,7 @@
 import os
 
-import api
-from api import l
+from api import api
+l = api.l
 
 from subprocess import check_output
 
