@@ -3,7 +3,7 @@ import argparse
 import sys
 import os
 
-from termcolor import colored, cprint
+from termcolor import colored
 
 import subprocess
 from subprocess import call, check_output, STDOUT
@@ -13,10 +13,10 @@ import repl
 
 l = api.l
 
-projects = api.get_repos()
 
 
 def list_projects():
+    projects = api.get_repos()
     l('id'.ljust(9), 'white', False)
     l('description'.ljust(58), 'white', False)
     l('difficulty', 'white')
