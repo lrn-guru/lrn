@@ -143,6 +143,24 @@ def next_task():
 
 
 def main():
+    help_message = (
+        'Available commands:\n\n'
+        '\tlist     ----  Give a list of all available tutorials.\n'
+        '\tstart    ----  Start a lesson.\n'
+        '\tprogress ----  Display your lesson progress in a tutorial\n'
+        '\thint     ----  Give a hint for the current problem\n'
+        '\tresume   ----  Resume the tutorial after user exits\n'
+        '\tnext     ----  Advance to the next lesson\n'
+    )
+    if (len(sys.argv) == 1):
+        print(help_message)
+        exit(0)
+    description = 'lrn -- the interactive tutorial platform'
+    parser = argparse.ArgumentParser(description=description)
+    parser.add_argument('command', help='The action to take (list, start, et cetera)')
+    # parser.add_argument('-v', '--virtual', help='Whether or not to run lrn in a virtual machine')
+
+    args, sub_args = parser.parse_known_args()
     if args.command == 'list':
         list_projects()
     elif args.command == 'start':
@@ -162,23 +180,4 @@ def main():
         print('Command not recogned. Enter `lrn` for commands.')
 
 if __name__ == '__main__':
-
-    help_message = (
-        'Available commands:\n\n'
-        '\tlist     ----  Give a list of all available tutorials.\n'
-        '\tstart    ----  Start a lesson.\n'
-        '\tprogress ----  Display your lesson progress in a tutorial\n'
-        '\thint     ----  Give a hint for the current problem\n'
-        '\tresume   ----  Resume the tutorial after user exits\n'
-        '\tnext     ----  Advance to the next lesson\n'
-    )
-    if (len(sys.argv) == 1):
-        print(help_message)
-        exit(0)
-    description = 'lrn -- the interactive tutorial platform'
-    parser = argparse.ArgumentParser(description=description)
-    parser.add_argument('command', help='The action to take (list, start, et cetera)')
-    # parser.add_argument('-v', '--virtual', help='Whether or not to run lrn in a virtual machine')
-
-    args, sub_args = parser.parse_known_args()
     main()
